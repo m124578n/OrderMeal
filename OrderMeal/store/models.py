@@ -9,7 +9,7 @@ class Store(models.Model):
         OTHER = 3
     name = models.CharField(max_length=255)
     describe = models.CharField(max_length=255)
-    catagory = models.IntegerField(choices=Category.choices)
+    category = models.IntegerField(choices=Category.choices)
     note = models.CharField(max_length=255)
 
     class Meta:
