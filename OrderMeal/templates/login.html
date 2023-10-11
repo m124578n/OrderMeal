@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+訂餐團-登入
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="login">
+        <input class="userId" placeholder="請輸入員工編號">
+        <input class="passwd" type="password" placeholder="請輸入密碼">
+        <input class="loginBtn" type="button" value="登入" onclick="toIndex()">
+    </div>
+</div>
+<script>
+    function toIndex(){
+        location.href="/index/"
+    }
+</script>
+<style>
+    .container {
+        width: 100hv;
+        height: 100hv;
+        margin: 20%;
+    }
+    .login {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    .userId{
+        width: 200px;
+        height: 25px;
+    }
+    .passwd{
+        width: 200px;
+        height: 25px;
+    }
+    .loginBtn{
+        width: 200px;
+        height: 30px;
+    }
+
+</style>
+{% endblock  %}

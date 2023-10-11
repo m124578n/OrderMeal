@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}訂餐團-主頁{% endblock  %}
+{% block content %}
+{% include "nav_bar.html" %}
+<div class="content">
+    <div class="buttons">
+        <button>店家管理</button>
+        <button>發起團購</button>
+    </div>
+    <div class="groupArea">
+        <div class="group">
+            1
+        </div>
+        <div class="group">
+            2
+        </div>
+        <div class="group">
+            3
+        </div>
+        <div class="group">
+            4
+        </div>
+        <div class="group">
+            5
+        </div>
+        <div class="group">
+            6
+        </div>
+    </div>
+</div>
+<style>
+    .content {
+        min-width: 1200px;
+        display: flex;
+        margin-top: 30px;
+        margin-left: 30px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .content .buttons {
+        display: flex;
+        gap: 20px;
+    }
+    .content .groupArea {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .content .groupArea .group {
+        width: 300px;
+        height: 300px;
+    }
+</style>
+{% endblock  %}

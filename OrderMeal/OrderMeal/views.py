@@ -4,12 +4,11 @@ from django.http import JsonResponse
 
 def index(request):
     context = {}
-    
     return render(request, 'index.html', context)
 
 
 def login_page(request):
-    pass
+    return render(request, 'login.html')
 
 
 def store(request):

@@ -19,10 +19,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    path('', views.login_page),
+    path('index/', views.index),
     path('admin/', admin.site.urls),
     path('group/', include('group.urls')),
     path('store/', include('store.urls')),
     path('staff/', include('staff.urls')),
-
-    
 ]
