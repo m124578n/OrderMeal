@@ -26,6 +26,7 @@ class GroupMember(models.Model):
     item_name = models.CharField(max_length=255)
     item_price = models.DecimalField(max_digits=7, decimal_places=0)
     item_quantity = models.DecimalField(max_digits=3, decimal_places=0)
+    is_pay = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'group_member'
