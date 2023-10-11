@@ -8,7 +8,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def login(request):
+def login_page(request):
     pass
 
 
@@ -21,4 +21,8 @@ def store_menu(request):
 
 
 def group(request):
+    pass
+
+
+def login(request):
     pass
