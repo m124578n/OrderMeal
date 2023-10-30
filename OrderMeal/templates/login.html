@@ -7,12 +7,35 @@
     <div class="login">
         <input class="userId" placeholder="請輸入員工編號">
         <input class="passwd" type="password" placeholder="請輸入密碼">
-        <input class="loginBtn" type="button" value="登入" onclick="toIndex()">
+        <input class="loginBtn" type="button" value="登入" onclick="to_login()">
     </div>
 </div>
 <script>
-    function toIndex(){
-        location.href="/index/"
+    function to_login(){
+        userId = document.querySelector(".userId").value
+        passwd = document.querySelector(".passwd").value
+        data = {"userId" : userId, "passwd" : passwd}
+        fetch("/api/login/", {
+            headers: { 
+                "X-CSRFToken": "{{csrf_token}}",
+                "user-agent": "Mozilla/4.0 MDN Example",
+                "content-type": "application/json", 
+            },
+            method: "POST", 
+            body: JSON.stringify(data),
+        })
+        .then(function (response){
+            return response.json()
+        })
+        .then(function (myJosn){
+            if (myJosn["status"] == 200){
+                localStorage.setItem("token", myJosn["token"])
+                location.href="/index/"
+            }
+            else{
+                alert(myJosn)
+            }
+        })
     }
 </script>
 <style>
