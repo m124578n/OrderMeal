@@ -37,7 +37,7 @@ def login_api(request):
     if staff is None:
         return JsonResponse({"status" : 404})
     if staff[0].password != password:
-        return JsonResponse({"status" : 404})
+        return JsonResponse({"status" : 402})
     token = generate_jwt_token(staff_id)
     return JsonResponse({"status" : 200 , "token" : token})
     
