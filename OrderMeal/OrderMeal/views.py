@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+import jwt
 
 
 def index(request):
@@ -23,5 +24,5 @@ def group(request):
     pass
 
 
-def login(request):
+def login_api(request):
     pass
