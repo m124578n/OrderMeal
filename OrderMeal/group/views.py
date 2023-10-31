@@ -1,9 +1,13 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
+from group.models import Group
+from OrderMeal.units import verify_jwt
 # Create your views here.
 
-def get_all_group(request):
-    pass
+@verify_jwt
+def get_all_group(request, user_id):
+    groups = Group.objects.filter(status=Group.Status.START)
+    return JsonResponse({"status" : 200, "groups" : list(groups.values())})
 
 
 def create_new_group(request):

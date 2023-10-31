@@ -3,6 +3,8 @@
 {% block title %}訂餐團-主頁{% endblock  %}
 {% block content %}
 {% include "nav_bar.html" %}
+{% load static %}
+<script src="{% static 'js/group.js' %}"></script>
 <div class="content">
     <div class="buttons">
         <button>店家管理</button>
@@ -31,6 +33,7 @@
         </div>
     </div>
 </div>
+
 <style>
     .content {
         min-width: 1200px;
