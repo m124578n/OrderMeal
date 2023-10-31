@@ -5,6 +5,8 @@
 {% include "nav_bar.html" %}
 {% load static %}
 <script src="{% static 'js/group.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
 <div class="content">
     <div class="buttons">
         <button>店家管理</button>
@@ -33,31 +35,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .content {
-        min-width: 1200px;
-        display: flex;
-        margin-top: 30px;
-        margin-left: 30px;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .content .buttons {
-        display: flex;
-        gap: 20px;
-    }
-    .content .groupArea {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 50px;
-    }
-    .content .groupArea .group {
-        display: flex;
-        justify-content: space-around;
-        width: 300px;
-        height: 300px;
-    }
-</style>
 {% endblock  %}
