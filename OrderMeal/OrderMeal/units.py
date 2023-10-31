@@ -3,9 +3,9 @@ import time
 from django.http import JsonResponse
 
 
-JWT_TOKEN_EXPIRE_TIME = 3600 * 2  # token有效时间 2小时
-JWT_SECRET = 'abc'   # 加解密密钥
-JWT_ALGORITHM = 'HS256'  # 加解密算法
+JWT_TOKEN_EXPIRE_TIME = 3600 * 2  # token有效時間
+JWT_SECRET = 'abc'
+JWT_ALGORITHM = 'HS256'
 
 
 def generate_jwt_token(user_id: int) -> str:
