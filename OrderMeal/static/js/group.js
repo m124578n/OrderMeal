@@ -1,29 +1,37 @@
 
 let state = {
-    groups : []
+    groups : [],
+    groups_end : [],
 }
 
 // 更新 state
-function updateState(newState) {
+function updateState(newState, status) {
     state = newState;
-    render()
+    render(status)
 }
         
 // state => UI
-function render() {
+function render(status) {
     // 先把畫面清空
-    $('.groupArea').empty();
-    console.log(state.groups)
-    $('.groupArea').append(
-    // 把每個 todo 的 HTML 集合起來放到畫面上
-    state.groups.map(group => Group(group)).join('')
-    );
+    $('.groupArea'+"_"+status).empty();
+    console.log(state, status)
+    if (status == "START"){
+        $('.groupArea'+"_"+status).append(
+            // 把每個 todo 的 HTML 集合起來放到畫面上
+            state.groups.map(group => Group(group)).join('')
+        );
+    }
+    else{
+        $('.groupArea'+"_"+status).append(
+            // 把每個 todo 的 HTML 集合起來放到畫面上
+            state.groups_end.map(group => Group(group)).join('')
+        );
+    }
 }
 
-window.onload = get_all_groups;
 
-function get_all_groups(){
-    fetch("/api/group/", {
+function get_all_groups_by_status(status){
+    fetch("/api/group?status="+status, {
         headers: {
             "Authorization": "Bearer" + " " + localStorage.getItem('token'),
         },
@@ -35,16 +43,24 @@ function get_all_groups(){
     .then(function (myJosn){
         if (myJosn["status"] == 200){
             myJosn["groups"].forEach(group => {
-                state = {
-                    groups: [...state.groups, {
-                        id: group.id,
-                        status: group.status,
-                        note: group.note
-                    }]
+                if (status === "START"){
+                    state.groups =
+                        [...state.groups, {
+                            id: group.id,
+                            status: group.status,
+                            note: group.note
+                        }]
+                    }
+                if (status === "END"){
+                    state.groups_end = [...state.groups_end, {
+                            id: group.id,
+                            status: group.status,
+                            note: group.note
+                        }]
+                    }
                 }
-            });
-            updateState(state)
-            
+            );
+            updateState(state, status)
         }
         else{
             alert(myJosn["status"])

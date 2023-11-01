@@ -5,8 +5,9 @@ from OrderMeal.units import verify_jwt
 # Create your views here.
 
 @verify_jwt
-def get_all_group(request, user_id):
-    groups = Group.objects.filter(status=Group.Status.START)
+def get_all_groups_by_status(request, *args, **kwargs):
+    status = request.GET.get("status")
+    groups = Group.objects.filter(status=Group.Status[status])
     return JsonResponse({"status" : 200, "groups" : list(groups.values())})
 
 

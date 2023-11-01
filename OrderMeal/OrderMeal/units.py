@@ -16,15 +16,12 @@ def generate_jwt_token(user_id: int) -> str:
 
 def verify_jwt(func):
     def wrap(request, *args, **kwargs):
-        try:
-            auth = request.headers["Authorization"]
-            token = auth.split(" ")[1]
-            _payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-            user_id = _payload.get("user_id")
-            exp = int(_payload.pop('exp'))
-            if time.time() > exp:
-                raise
-            return func(request, user_id, *args, **kwargs)
-        except:
+        auth = request.headers["Authorization"]
+        token = auth.split(" ")[1]
+        _payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        user_id = _payload.get("user_id", None)
+        exp = int(_payload.pop('exp'))
+        if time.time() > exp:
             return JsonResponse({"status" : 404})
+        return func(request, user_id=user_id, *args, **kwargs)
     return wrap

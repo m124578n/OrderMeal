@@ -12,7 +12,7 @@
         <button>店家管理</button>
         <button>發起團購</button>
     </div>
-    <div class="groupArea">
+    <div class="groupArea groupArea_START">
         <div class="group">
             1
             圖片
@@ -34,5 +34,16 @@
             6
         </div>
     </div>
+    <div class="groupArea groupArea_END">
+        <div class="group">
+            1
+            圖片
+            文字
+        </div>
+    </div>
 </div>
+<script>
+    window.onload = get_all_groups_by_status("START");
+    window.onload = get_all_groups_by_status("END");
+</script>
 {% endblock  %}
