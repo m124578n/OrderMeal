@@ -20,10 +20,10 @@ def verify_jwt(func):
         if auth is None:
             return JsonResponse({"status" : 404})
         token = auth.split(" ")[1]
-        _payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        user_id = _payload.get("user_id", None)
-        exp = int(_payload.pop('exp'))
-        if time.time() > exp:
+        try:
+            _payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        except:
             return JsonResponse({"status" : 404})
+        user_id = _payload.get("user_id", None)
         return func(request, user_id=user_id, *args, **kwargs)
     return wrap

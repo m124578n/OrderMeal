@@ -43,7 +43,9 @@
     </div>
 </div>
 <script>
-    window.onload = get_all_groups_by_status("START");
-    window.onload = get_all_groups_by_status("END");
+    window.onload = function(){
+        get_all_groups_by_status("START")
+        get_all_groups_by_status("END")
+    }
 </script>
 {% endblock  %}
