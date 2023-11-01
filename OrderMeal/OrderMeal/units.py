@@ -16,7 +16,9 @@ def generate_jwt_token(user_id: int) -> str:
 
 def verify_jwt(func):
     def wrap(request, *args, **kwargs):
-        auth = request.headers["Authorization"]
+        auth = request.headers.get("Authorization")
+        if auth is None:
+            return JsonResponse({"status" : 404})
         token = auth.split(" ")[1]
         _payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         user_id = _payload.get("user_id", None)
