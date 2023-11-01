@@ -2,6 +2,7 @@
 let state = {
     START : [],
     END : [],
+    own : []
 }
 
 // 更新 state
@@ -37,13 +38,42 @@ function get_all_groups_by_status(status){
             myJosn["groups"].forEach(group => {
                 state[status] =
                     [...state[status], {
-                        id: group.id,
-                        status: group.status,
-                        note: group.note
+                        id: group[0],
+                        status: group[1],
+                        note: group[2]
                     }]
                 }
             );
             updateState(state, status)
+        }
+        else if (myJosn["status"] == 404){
+            location.href = "/?timeout=1"
+        }
+    })
+}
+
+function get_groups_by_user_id(){
+    fetch("/api/group/user/", {
+        headers: {
+            "Authorization": "Bearer" + " " + localStorage.getItem('token'),
+        },
+        method: "GET",
+    })
+    .then(function (response){
+        return response.json()
+    })
+    .then(function (myJosn){
+        if (myJosn["status"] == 200){
+            myJosn["groups"].forEach(group => {
+                state.own =
+                    [...state.own, {
+                        id: group[0],
+                        status: group[1],
+                        note: group[2]
+                    }]
+                }
+            );
+            updateState(state, "own")
         }
         else if (myJosn["status"] == 404){
             location.href = "/?timeout=1"
