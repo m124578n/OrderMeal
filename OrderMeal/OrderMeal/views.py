@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from staff.models import Staff
 
-from OrderMeal.units import generate_jwt_token
+from OrderMeal.utils import generate_jwt_token
 import json
 
 
@@ -18,7 +18,8 @@ def login_page(request):
 
 
 def store(request):
-    pass
+    context = {}
+    return render(request, 'store/store.html', context)
 
 
 def store_menu(request):

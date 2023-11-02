@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}店家-主頁{% endblock  %}
+{% block content %}
+{% include "nav_bar.html" %}
+{% load static %}
+<script src="{% static 'js/store.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
+<div class="content">
+    <div class="buttons">
+        <button onclick="location.href='/index/'">團購團列表</button>
+    </div>
+    店家列表
+    <div class="groupArea storeArea">
+        <div class="group store">
+            1
+            圖片
+            文字
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        get_all_stores()
+    }
+</script>
+{% endblock  %}

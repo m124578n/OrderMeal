@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from group.models import Group, GroupMember
-from OrderMeal.units import verify_jwt
+from OrderMeal.utils import verify_jwt
 # Create your views here.
 
 @verify_jwt

@@ -22,6 +22,14 @@ function render(status) {
     );
 }
 
+function Group({id, status, note}){
+    return `
+        <div class="group">
+            ${id} ${status} ${note}
+        </div>
+    `
+}
+
 
 function get_all_groups_by_status(status){
     fetch("/api/group?status="+status, {
@@ -81,10 +89,4 @@ function get_groups_by_user_id(){
     })
 }
 
-function Group({id, status, note}){
-    return `
-        <div class="group">
-            ${id} ${status} ${note}
-        </div>
-    `
-}
+
