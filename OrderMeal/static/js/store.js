@@ -23,6 +23,7 @@ function Store({id, status, note}){
     return `
         <div class="group store">
             ${id} ${status} ${note}
+            <a href="/group/order?store=${id}">開團</a>
         </div>
     `
 }
