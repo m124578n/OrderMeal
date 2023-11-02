@@ -12,7 +12,7 @@ def index(request):
 
 
 def login_page(request):
-    timeout = request.GET.get("timeout", None)
+    timeout = request.GET.get("timeout", 0)
     context = {"timeout" : int(timeout)}
     return render(request, 'login.html', context)
 
