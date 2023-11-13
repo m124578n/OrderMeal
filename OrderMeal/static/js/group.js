@@ -22,10 +22,11 @@ function render(status) {
     );
 }
 
-function Group({id, status, note}){
+function Group({id, status, note, store_id, image_url}){
     return `
         <div class="group">
-            ${id} ${status} ${note}
+            <img src="${image_url}" width="150px" height="120px" alt="" />
+            ${id} ${status} ${store_id} ${note}
         </div>
     `
 }
@@ -48,11 +49,14 @@ function get_all_groups_by_status(status){
                     [...state[status], {
                         id: group[0],
                         status: group[1],
-                        note: group[2]
+                        note: group[2],
+                        store_id: group[3],
+                        image_url: null
                     }]
                 }
             );
             updateState(state, status)
+            get_all_images(status)
         }
         else if (myJosn["status"] == 404){
             location.href = "/?timeout=1"
@@ -77,11 +81,14 @@ function get_groups_by_user_id(){
                     [...state.own, {
                         id: group[0],
                         status: group[1],
-                        note: group[2]
+                        note: group[2],
+                        store_id: group[3],
+                        image_url: null
                     }]
                 }
             );
             updateState(state, "own")
+            get_all_images("own")
         }
         else if (myJosn["status"] == 404){
             location.href = "/?timeout=1"
@@ -89,4 +96,30 @@ function get_groups_by_user_id(){
     })
 }
 
-
+function get_all_images(status){
+    fetch("/api/store/images/", {
+        headers: {
+            "Authorization": "Bearer" + " " + localStorage.getItem('token'),
+        },
+        method: "GET",
+    })
+    .then(function (response){
+        return response.json()
+    })
+    .then(function (myJosn){
+        if (myJosn["status"] == 200){
+            myJosn["images"].forEach(image => {
+                state[status].map(store => {
+                    if (store["store_id"] == image[0]){
+                        store["image_url"] = image[1]
+                        }
+                    })
+                }
+            )
+            updateState(state, status)
+        }
+        else if (myJosn["status"] == 404){
+            location.href = "/?timeout=1"
+        }
+    })
+}
