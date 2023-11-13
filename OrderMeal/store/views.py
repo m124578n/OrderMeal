@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from store.models import Store
+from store.models import Store, StoreImage
 
 from OrderMeal.utils import verify_jwt
 # Create your views here.
@@ -10,6 +10,13 @@ def get_all_store(request, *args, **kwargs):
     stores = Store.objects.all()
     stores = stores.values_list("id", "name", "note")
     return JsonResponse({"status": 200, "stores": list(stores)})
+
+
+@verify_jwt
+def get_all_stores_images(request, *args, **kwargs):
+    images = StoreImage.objects.all()
+    images = images.values_list("store", "image_url")
+    return JsonResponse({"status": 200, "images": list(images)})
 
 
 def create_new_store(request):

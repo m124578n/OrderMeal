@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', views.login_page),
@@ -28,3 +29,5 @@ urlpatterns = [
     path('api/store/', include('store.urls')),
     path('api/staff/', include('staff.urls')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
