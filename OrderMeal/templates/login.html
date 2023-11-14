@@ -31,13 +31,13 @@
         .then(function (response){
             return response.json()
         })
-        .then(function (myJosn){
-            if (myJosn["status"] == 200){
-                localStorage.setItem("token", myJosn["token"])
+        .then(function (myJson){
+            if (myJson["status"] == 200){
+                localStorage.setItem("token", myJson["token"])
                 location.href="/index/"
             }
             else{
-                alert(myJosn["status"])
+                alert(myJson["status"])
             }
         })
     }

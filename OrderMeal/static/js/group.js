@@ -42,9 +42,9 @@ function get_all_groups_by_status(status){
     .then(function (response){
         return response.json()
     })
-    .then(function (myJosn){
-        if (myJosn["status"] == 200){
-            myJosn["groups"].forEach(group => {
+    .then(function (myJson){
+        if (myJson["status"] == 200){
+            myJson["groups"].forEach(group => {
                 state[status] =
                     [...state[status], {
                         id: group[0],
@@ -58,7 +58,7 @@ function get_all_groups_by_status(status){
             updateState(state, status)
             get_all_images(status)
         }
-        else if (myJosn["status"] == 404){
+        else if (myJson["status"] == 404){
             location.href = "/?timeout=1"
         }
     })
@@ -74,9 +74,9 @@ function get_groups_by_user_id(){
     .then(function (response){
         return response.json()
     })
-    .then(function (myJosn){
-        if (myJosn["status"] == 200){
-            myJosn["groups"].forEach(group => {
+    .then(function (myJson){
+        if (myJson["status"] == 200){
+            myJson["groups"].forEach(group => {
                 state.own =
                     [...state.own, {
                         id: group[0],
@@ -90,7 +90,7 @@ function get_groups_by_user_id(){
             updateState(state, "own")
             get_all_images("own")
         }
-        else if (myJosn["status"] == 404){
+        else if (myJson["status"] == 404){
             location.href = "/?timeout=1"
         }
     })
@@ -106,9 +106,9 @@ function get_all_images(status){
     .then(function (response){
         return response.json()
     })
-    .then(function (myJosn){
-        if (myJosn["status"] == 200){
-            myJosn["images"].forEach(image => {
+    .then(function (myJson){
+        if (myJson["status"] == 200){
+            myJson["images"].forEach(image => {
                 state[status].map(store => {
                     if (store["store_id"] == image[0]){
                         store["image_url"] = image[1]
@@ -118,7 +118,7 @@ function get_all_images(status){
             )
             updateState(state, status)
         }
-        else if (myJosn["status"] == 404){
+        else if (myJson["status"] == 404){
             location.href = "/?timeout=1"
         }
     })

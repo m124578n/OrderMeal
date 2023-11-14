@@ -39,9 +39,9 @@ function get_all_stores(){
     .then(function (response){
         return response.json()
     })
-    .then(function (myJosn){
-        if (myJosn["status"] == 200){
-            myJosn["stores"].forEach(store => {
+    .then(function (myJson){
+        if (myJson["status"] == 200){
+            myJson["stores"].forEach(store => {
                 state.stores =
                     [...state.stores, {
                         id: store[0],
@@ -53,7 +53,7 @@ function get_all_stores(){
             );
             updateState(state)
         }
-        else if (myJosn["status"] == 404){
+        else if (myJson["status"] == 404){
             location.href = "/?timeout=1"
         }
         get_all_images()
@@ -70,10 +70,10 @@ function get_all_images(){
     .then(function (response){
         return response.json()
     })
-    .then(function (myJosn){
-        console.log(myJosn)
-        if (myJosn["status"] == 200){
-            myJosn["images"].forEach(image => {
+    .then(function (myJson){
+        console.log(myJson)
+        if (myJson["status"] == 200){
+            myJson["images"].forEach(image => {
                 state.stores.map(store => {
                     if (store["id"] == image[0]){
                         store["image_url"] = image[1]
@@ -83,7 +83,7 @@ function get_all_images(){
             )
             updateState(state)
         }
-        else if (myJosn["status"] == 404){
+        else if (myJson["status"] == 404){
             location.href = "/?timeout=1"
         }
     })
